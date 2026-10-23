@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f6f4ee">
+  <title>Ana Silva | Nutricionista</title>
+  <style>
+    :root {
+      --green: #435746;
+      --green-dark: #293d31;
+      --cream: #f6f4ee;
+      --paper: #fffefa;
+      --text: #26372f;
+      --muted: #657168;
+      --line: #dedfd7;
+      --sage: #e8ece4;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--cream);
+      color: var(--text);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.6;
+    }
+    header {
+      padding: 20px 6%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      border-bottom: 1px solid rgba(67,87,70,.12);
+      background: rgba(255,254,250,.9);
+    }
+    .brand { display: flex; align-items: center; gap: 12px; }
+    .brand-mark {
+      width: 42px; height: 42px; display: grid; place-items: center;
+      color: var(--green); font-size: 31px; line-height: 1;
+    }
+    .brand-name { font-family: Georgia, serif; font-size: 25px; line-height: 1.1; }
+    .brand-sub { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--muted); }
+    .header-note { font-size: 13px; color: var(--muted); }
+    .hero {
+      padding: 64px 6%;
+      min-height: 290px;
+      background:
+        radial-gradient(ellipse at 85% 25%, rgba(163,177,146,.35), transparent 35%),
+        linear-gradient(110deg, #efeee7, #e4e8dc);
+    }
+    .hero-inner { max-width: 1100px; margin: auto; }
+    .eyebrow { margin: 0 0 12px; color: var(--green); font-size: 12px; font-weight: bold; letter-spacing: 2px; text-transform: uppercase; }
+    h1 { max-width: 560px; margin: 0 0 16px; font: 500 clamp(36px, 5vw, 54px)/1.12 Georgia, serif; letter-spacing: -.8px; }
+    .hero p:last-child { max-width: 510px; margin: 0; color: #526057; font-size: 17px; }
+    main { width: min(900px, 90%); margin: 36px auto 0; }
+    .form-card {
+      background: var(--paper); border: 1px solid var(--line); border-radius: 16px;
+      padding: clamp(22px, 4vw, 38px); box-shadow: 0 12px 35px rgba(40,55,44,.035);
+    }
+    .form-intro { margin: 0 0 28px; color: var(--muted); font-size: 14px; }
+    fieldset { border: 0; padding: 0; margin: 0; min-width: 0; }
+    .question + .question { border-top: 1px solid #e7e7e0; margin-top: 28px; padding-top: 28px; }
+    legend { display: flex; align-items: center; gap: 14px; width: 100%; margin-bottom: 16px; font: 500 21px/1.35 Georgia, serif; }
+    .number {
+      flex: 0 0 42px; width: 42px; height: 42px; border-radius: 50%; display: grid; place-items: center;
+      background: var(--green); color: white; font: 20px Georgia, serif;
+    }
+    .options { display: grid; gap: 9px; padding-left: 56px; }
+    .option { display: flex; align-items: center; gap: 12px; padding: 12px 14px; border: 1px solid var(--line); border-radius: 10px; cursor: pointer; transition: border-color .15s, background .15s; }
+    .option:hover { border-color: #a6b3a3; }
+    .option:has(input:checked) { border-color: var(--green); background: #f0f3ed; }
+    .option input { width: 17px; height: 17px; accent-color: var(--green); flex: 0 0 auto; }
+    .option span { font-size: 14px; }
+    .actions { text-align: center; padding-top: 30px; }
+    button {
+      border: 0; border-radius: 11px; padding: 14px 30px; min-width: 220px;
+      background: var(--green); color: white; font-size: 15px; font-weight: bold; cursor: pointer;
+    }
+    button:hover { background: var(--green-dark); }
+    button:focus-visible, input:focus-visible { outline: 3px solid #9bb29b; outline-offset: 3px; }
+    .error { color: #a2352b; font-size: 13px; margin: 12px 0 0; }
+    .result { display: none; margin-top: 20px; padding: 22px; border-radius: 12px; background: var(--sage); border: 1px solid #d4ddcf; }
+    .result.show { display: block; }
+    .result h2 { margin: 0 0 8px; font: 500 24px Georgia, serif; }
+    .result p { margin: 0; color: #46564a; }
+    .benefits { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; padding: 36px 0 42px; text-align: center; }
+    .benefit-icon { width: 48px; height: 48px; margin: 0 auto 10px; display: grid; place-items: center; background: #e9e8df; border-radius: 50%; color: var(--green); font-size: 23px; }
+    .benefits h3 { margin: 0 0 4px; font: 500 17px Georgia, serif; }
+    .benefits p { margin: 0; font-size: 13px; color: var(--muted); }
+    footer { text-align: center; padding: 18px; background: var(--green); color: #e9eee7; font-size: 12px; }
+    @media (max-width: 600px) {
+      header { padding: 16px 5%; }
+      .brand-name { font-size: 21px; }
+      .header-note { display: none; }
+      .hero { padding: 46px 6%; }
+      .hero p:last-child { font-size: 15px; }
+      main { width: 92%; margin-top: 22px; }
+      .form-card { padding: 20px 16px; }
+      legend { font-size: 18px; gap: 10px; }
+      .number { flex-basis: 36px; width: 36px; height: 36px; font-size: 18px; }
+      .options { padding-left: 0; }
+      .option { padding: 12px; }
+      .benefits { grid-template-columns: 1fr; gap: 24px; padding: 30px 12px; }
+      button { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="brand" aria-label="Ana Silva, nutricionista">
+      <div class="brand-mark" aria-hidden="true">❧</div>
+      <div>
+        <div class="brand-name">Ana Silva</div>
+        <div class="brand-sub">Nutricionista</div>
+      </div>
+    </div>
+    <div class="header-note">Mais saúde&nbsp; • &nbsp;Mais equilíbrio&nbsp; • &nbsp;Mais você</div>
+  </header>
+
+  <section class="hero">
+    <div class="hero-inner">
+      <p class="eyebrow">Avaliação nutricional</p>
+      <h1>Qual é o seu momento hoje?</h1>
+      <p>Responda a três perguntas rápidas para conhecer o tipo de cuidado nutricional que combina com seus objetivos.</p>
+    </div>
+  </section>
+
+  <main>
+    <form class="form-card" id="nutritionForm">
+      <p class="form-intro">Marque uma opção em cada pergunta para continuar.</p>
+
+      <fieldset class="question">
+        <legend><span class="number">1</span><span>Qual é o seu principal objetivo no momento?</span></legend>
+        <div class="options">
+          <label class="option"><input type="radio" name="objetivo" value="emagrecer" required><span>Emagrecer com saúde</span></label>
+          <label class="option"><input type="radio" name="objetivo" value="massa"><span>Ganhar massa muscular</span></label>
+          <label class="option"><input type="radio" name="objetivo" value="bemestar"><span>Melhorar a alimentação e o bem-estar</span></label>
+        </div>
+      </fieldset>
+
+      <fieldset class="question">
+        <legend><span class="number">2</span><span>Como é sua rotina de atividade física?</span></legend>
+        <div class="options">
+          <label class="option"><input type="radio" name="atividade" value="baixa" required><span>Tenho pouca atividade física</span></label>
+          <label class="option"><input type="radio" name="atividade" value="moderada"><span>Pratico de 1 a 3 vezes por semana</span></label>
+          <label class="option"><input type="radio" name="atividade" value="alta"><span>Pratico 4 ou mais vezes por semana</span></label>
+        </div>
+      </fieldset>
+
+      <fieldset class="question">
+        <legend><span class="number">3</span><span>Qual é seu maior desafio com a alimentação?</span></legend>
+        <div class="options">
+          <label class="option"><input type="radio" name="desafio" value="organizacao" required><span>Organizar minhas refeições</span></label>
+          <label class="option"><input type="radio" name="desafio" value="constancia"><span>Manter a constância durante a semana</span></label>
+          <label class="option"><input type="radio" name="desafio" value="equilibrio"><span>Encontrar equilíbrio sem dietas restritivas</span></label>
+        </div>
+      </fieldset>
+
+      <div class="actions">
+        <button type="submit">Ver meu resultado <span aria-hidden="true">→</span></button>
+        <p id="errorMessage" class="error" role="alert" hidden>Selecione uma opção em cada pergunta antes de continuar.</p>
+      </div>
+
+      <section class="result" id="result" aria-live="polite">
+        <h2 id="resultTitle">Seu próximo passo</h2>
+        <p id="resultText"></p>
+      </section>
+    </form>
+
+    <section class="benefits" aria-label="Como funciona o acompanhamento">
+      <div>
+        <div class="benefit-icon" aria-hidden="true">♧</div>
+        <h3>Atendimento humanizado</h3>
+        <p>Seu momento e sua rotina são levados em conta.</p>
+      </div>
+      <div>
+        <div class="benefit-icon" aria-hidden="true">♡</div>
+        <h3>Plano personalizado</h3>
+        <p>Estratégias pensadas para seus objetivos.</p>
+      </div>
+      <div>
+        <div class="benefit-icon" aria-hidden="true">⌁</div>
+        <h3>Sem fórmulas prontas</h3>
+        <p>Um cuidado possível, construído passo a passo.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>Ana Silva &nbsp; • &nbsp; Nutricionista fictícia &nbsp; • &nbsp; CRN 0000</footer>
+
+  <script>
+    const form = document.getElementById('nutritionForm');
+    const result = document.getElementById('result');
+    const resultTitle = document.getElementById('resultTitle');
+    const resultText = document.getElementById('resultText');
+    const errorMessage = document.getElementById('errorMessage');
+
+    form.addEventListener('submit', function (event) {
+      event.preventDefault();
+      const data = new FormData(form);
+      const required = ['objetivo', 'atividade', 'desafio'];
+      const complete = required.every(key => data.get(key));
+
+      if (!complete) {
+        errorMessage.hidden = false;
+        result.classList.remove('show');
+        const firstMissing = required.find(key => !data.get(key));
+        form.querySelector('input[name="' + firstMissing + '"]').focus();
+        return;
+      }
+
+      errorMessage.hidden = true;
+      const objective = {
+        emagrecer: ['Foco em hábitos sustentáveis', 'Seu objetivo pode começar com mudanças graduais e realistas na rotina, sem depender de soluções rápidas.'],
+        massa: ['Foco em força e recuperação', 'Organizar refeições e alinhar a alimentação à sua rotina de treino pode ajudar a apoiar seus objetivos.'],
+        bemestar: ['Foco em equilíbrio no dia a dia', 'Pequenas escolhas consistentes podem ajudar você a construir uma relação mais tranquila com a alimentação.']
+      };
+      const challenge = {
+        organizacao: ' Uma boa primeira etapa é planejar algumas refeições simples para os dias mais corridos.',
+        constancia: ' Vale buscar uma rotina flexível, que funcione também nos dias em que tudo sai do planejado.',
+        equilibrio: ' Priorizar variedade e flexibilidade pode ajudar a tornar seus hábitos mais sustentáveis.'
+      };
+
+      resultTitle.textContent = objective[data.get('objetivo')][0];
+      resultText.textContent = objective[data.get('objetivo')][1] + challenge[data.get('desafio')] + ' Este resultado é apenas informativo e não substitui uma avaliação individual com nutricionista.';
+      result.classList.add('show');
+      result.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    });
+  </script>
+</body>
+</html>
